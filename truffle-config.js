@@ -47,9 +47,6 @@ module.exports = {
      network_id: "*",       // Any network (default: none)
     },
 
-    contracts_directory: './src/contracts',
-    contracts_build_directory: './src/abis',
-
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
@@ -77,6 +74,9 @@ module.exports = {
     // }
   },
 
+  contracts_directory: './src/contracts/',
+  contracts_build_directory: './src/abis',
+
   // Set default mocha options here, use special reporters etc.
   mocha: {
     // timeout: 100000
@@ -91,7 +91,7 @@ module.exports = {
       optimizer: {
         enabled: true,
         runs: 200
-      },
+      }
       //  evmVersion: "byzantium"
       // }
     }
