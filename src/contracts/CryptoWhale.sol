@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract Cryptowhale {
-    string public name;
-    string public symbol;
+import './ERC721Connector.sol';
 
-    constructor(){
-        name = 'Cryptowhale';
-        symbol = 'CWHALE';
+contract Cryptowhale is ERC721Connector {
+
+    constructor() ERC721Connector('CryptoWhale', 'CWHALE'){
+        {}
     }
 }
