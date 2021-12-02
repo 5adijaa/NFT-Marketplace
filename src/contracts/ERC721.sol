@@ -12,11 +12,23 @@ pragma solidity ^0.8.0;
     */
 contract ERC721 {
 
-    event Transfer(address indexed from, address indexed to, uint indexed tokenId);
+    event Transfer(
+        address indexed from, 
+        address indexed to, 
+        uint indexed tokenId
+    );
+
+    event Approval(
+        address indexed owner,
+        address indexed approval,
+        uint indexed tokenId
+    );
 
     mapping(uint => address) private _tokenOwner;
 
     mapping(address => uint) private _OwnedTokensCount;
+
+    mapping(uint => address) private _tokenApprovals;
 
     /// @notice Count all NFTs assigned to an owner
     /// @dev NFTs assigned to the zero address are considered invalid, and this
@@ -33,7 +45,7 @@ contract ERC721 {
     ///  about them do throw.
     /// @param _tokenId The identifier for an NFT
     /// @return The address of the owner of the NFT
-    function ownerOf(uint _tokenId) external view returns (address){
+    function ownerOf(uint _tokenId) public view returns (address){
         address owner = _tokenOwner[_tokenId];
         require(owner != address(0), 'Owner query for non-existant token');
         return owner;
@@ -59,5 +71,41 @@ contract ERC721 {
 
         emit Transfer(address(0), to, tokenId);
     }
+
+    /*
+    *
+    *
+    function _transferFrom(address _from, address _to, uint256 _tokenId) internal {
+        require(_to != address(0), 'Error - ERC721 Transfer to the zero address');
+        require(ownerOf(_tokenId) == _from, 'Trying to transfer a token the address does not own!');
+
+        // _OwnedTokensCount[_from].decrement();
+        // _OwnedTokensCount[_to].increment();
+
+        _tokenOwner[_tokenId] = _to;
+
+        emit Transfer(_from, _to, _tokenId);
+    }
+
+    function TransferFrom(address _from, address _to, uint _tokenId) override public{
+        require(isApprovedOrOwner(msg.sender, _tokenId));
+        _transferFrom(_from, _to, _tokenId);
+    }
+
+    function Approve(address _to, uint tokenId) public {
+        address owner = ownerOf(tokenId);
+        require(_to != owner, 'Error - Approval to current owner');
+        require(msg.sender == owner, 'Current caller is not the owner of the token');
+        _tokenApprovals[tokenId] = _to;
+
+        emit Approval(owner, _to, tokenId);
+    }
+
+    function isApprovedOrOwner(address spender, uint256 tokenId) internal view returns(bool) {
+        require(_exists(tokenId), 'token does not exist');
+        address owner = ownerOf(tokenId);
+        return(spender == owner);
+    }
+    */
 
 }
